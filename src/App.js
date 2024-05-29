@@ -1,34 +1,36 @@
-
 import { useState } from 'react';
 import './App.css';
+import TodoForm from './component/TodoForm';
+import Todos from './component/Todos';
 
 function App() {
-  const [userName, setUserName] = useState('')
-  const [password, setPassword] = useState('')
-  function handleUserName(e) {
-    setUserName(e.target.value)
-  }
-  function handelPassword(e) {
-    setPassword(e.target.value)
-  }
+  const [tasks, setTasks] = useState([
+    {id: 1, title: 'Learn React', isCompleted: false},
+    {id: 2, title: 'Learn JavaScript', isCompleted: true},
+    {id: 3, title: 'Learn MongoDb', isCompleted: false}
+  ])
 
-  function handelformSubmit(e) {
-    e.preventDefault()
-    console.log('submit');
-  }
+const addTodo = (newTodo) => {
+  setTasks(previce => [...previce, newTodo])
+}
+
+const toggleCheckbox = (id) => {
+ setTasks((previce) => {
+  return previce.map((completed) => {
+    if(completed.id === id) {
+    console.log(completed.id, id);
+     return {...completed, isCompleted: !completed.isCompleted} 
+    } else {
+      return completed
+    }
+  }) 
+ })
+}
   return (
     <div className="App">
-      <form onSubmit={handelformSubmit}>
-        <div>
-          <label>User Name:</label>
-          <input type='text' value={userName} onChange={handleUserName} />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input type='password' value={password} onChange={handelPassword} />
-        </div>
-        <button type='submit' >Submit</button>
-      </form>
+      <h1>Todo List</h1>
+      <TodoForm addTodo ={addTodo}/>
+      <Todos tasks={tasks} toggleCheckbox= {toggleCheckbox} />
     </div>
   );
 }
