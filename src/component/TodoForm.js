@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { v4 as uuid } from 'uuid';
+import { toast } from "react-toastify";
 
 export default function TodoForm({ addTodo }) {
     const [title, setTitle] = useState('')
@@ -13,7 +14,8 @@ export default function TodoForm({ addTodo }) {
         }
         
         if(title.trim().length === 0) {
-           return  alert("Can not be save empty data")
+           return  toast.error("Can not be save empty data", { auotoClose: 2000})
+          
         }
         addTodo(newTodo)
         setTitle('')

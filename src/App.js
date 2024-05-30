@@ -2,6 +2,8 @@ import { useState } from 'react';
 import './App.css';
 import TodoForm from './component/TodoForm';
 import Todos from './component/Todos';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [tasks, setTasks] = useState([
@@ -14,6 +16,13 @@ const addTodo = (newTodo) => {
   setTasks(previce => [...previce, newTodo])
 }
 
+const removeTodo = (id) => {
+  setTasks(previce => previce.filter((element) => {
+    return   element.id !== id
+
+  }))
+}
+ 
 const toggleCheckbox = (id) => {
  setTasks((previce) => {
   return previce.map((completed) => {
@@ -28,9 +37,11 @@ const toggleCheckbox = (id) => {
 }
   return (
     <div className="App">
+      <ToastContainer/>
       <h1>Todo List</h1>
       <TodoForm addTodo ={addTodo}/>
-      <Todos tasks={tasks} toggleCheckbox= {toggleCheckbox} />
+      <Todos tasks={tasks} toggleCheckbox= {toggleCheckbox} 
+      removeTodo = {removeTodo} />
     </div>
   );
 }
