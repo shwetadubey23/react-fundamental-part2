@@ -5,9 +5,9 @@ import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>  // remove strictMode then useEffect call one time whenever component render
     <App />
-  </React.StrictMode>
+  // </React.StrictMode>
 );
 
 

@@ -2,13 +2,13 @@ import React from 'react';
 import './App.css';
 // import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import SubmitForm from './component/SubmitForm';
+import ExampleUseEffect from './ExampleUseEffect';
 
 function App() {
 
   return (
     <div className="App">
-    <SubmitForm />
+ <ExampleUseEffect/>
     </div>
   );
 }
