@@ -8,12 +8,12 @@ export default function ExampleWithFetch() {
     const [isError, setIsError] = useState(false)
     const [errorMsg, setErrorMsg] = useState('')
 
-
-
     useEffect(() => {
+        const controller = new AbortController();
+        const singnal = controller.signal;
 
         const fetchData = async () => {
-            const response = await fetch(URL)
+            const response = await fetch(URL, { singnal: singnal })
             // console.log(response);
             if (!(response.status >= 200 && response.status <= 299)) {
                 setIsError(true)
@@ -29,7 +29,11 @@ export default function ExampleWithFetch() {
 
         fetchData()
 
-        
+        return () => {
+            console.log("aborting request......");
+            controller.abort()
+        }
+
     }, [])
 
     if (isloding) {
@@ -42,7 +46,7 @@ export default function ExampleWithFetch() {
 
     return (
         <div style={{ 'margin': '1rem' }}>
-            {users.map((user) => (<User key= {user.id} {...user} />))}
+            {users.map((user) => (<User key={user.id} {...user} />))}
 
         </div>
     )
