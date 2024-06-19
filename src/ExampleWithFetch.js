@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import User from './User'
+const URL = 'https://jsonplaceholder.typicode.com/users';
 
 export default function ExampleWithFetch() {
     const [users, setUsers] = useState([])
@@ -7,33 +8,28 @@ export default function ExampleWithFetch() {
     const [isError, setIsError] = useState(false)
     const [errorMsg, setErrorMsg] = useState('')
 
-    const URL = 'https://jsonplaceholder.typicode.com/users';
 
-    const fetchData = async () => {
-        const response = await fetch(URL)
-        // console.log(response);
-        if (!(response.status >= 200 && response.status <= 299)) {
-            setIsError(true)
-            setErrorMsg(`${response.status}`)
-            setIsLoding(false)
-            return
-        }
-        const data = await response.json()
-        console.log(data);
-        setUsers(data)
-        setIsLoding(false)
-    }
 
     useEffect(() => {
+
+        const fetchData = async () => {
+            const response = await fetch(URL)
+            // console.log(response);
+            if (!(response.status >= 200 && response.status <= 299)) {
+                setIsError(true)
+                setErrorMsg(`${response.status}`)
+                setIsLoding(false)
+                return
+            }
+            const data = await response.json()
+            console.log(data);
+            setUsers(data)
+            setIsLoding(false)
+        }
+
         fetchData()
 
-        // fetch(URL)
-        //     .then((response) => {
-        //         return response.json();
-        //     })
-        //     .then((data) => {
-        //         console.log(data);
-        //     })
+        
     }, [])
 
     if (isloding) {
