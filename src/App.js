@@ -1,52 +1,30 @@
-import { useReducer } from 'react';
+import { createContext } from 'react';
 import './App.css';
-import Todos from './Todos';
-import AddTodo from './AddTodo';
+import MyComponent from './MyComponent';
 
 
-function reducer(todoState, action) {
-if(action.type === 'DELETE'  ) {
- return todoState.filter((todo) => {
-  return todo.id !== action.payload.id 
- })
-// console.log('Deleting todo');
-// console.log(action.payload.id);
-}
+// to avoid prov drilling we use context
 
-if(action.type === 'TOGGEL_COMPLETED') {
-  return todoState.map((todo) => {
-    if(todo.id === action.payload.id) {
-      return {...todo, completed: !todo.completed}
-    }
-    // console.log('Toggle');
-    return todo
-  })
-}
+// how to use context
+// step 1: import createContext from React
+// step 2: create a context outside the cmponent
+// step 3: wrap application in context.Provider
 
-if(action.type === 'ADD_TODO') {
-return [...initialState, action.payload.newTodo]
-}
-
-return todoState
-}
-
-const initialState = [
-    {id: "1", title: 'learn useReducer', completed: true},
-    {id: "2", title: 'learn react', completed: false}, 
-    {id: "3", title: 'become full stack', completed: false}
-] 
-
+export const MyAppContext = createContext()
 
 function App() {
-  const [todoState, dispatch] = useReducer(reducer, initialState)
-  
- 
+  function myFunc() {
+    console.log('Hello from my func');
+  }
   return (
-    <div className="App">
-    <AddTodo dispatch={dispatch}/>
-     <Todos todoState = {todoState} dispatch = {dispatch} />
-    </div>
+    <MyAppContext.Provider value={myFunc}>
+      <div style={{ padding: '2rem', backgroundColor: '#C8E4B2', height: '100vh', margin: '1rem' }}>
+        <h1>App</h1>
+        <MyComponent myFunc={myFunc} />
+      </div>
+    </MyAppContext.Provider>
   );
 }
 
 export default App;
+// export {MyAppContext}
