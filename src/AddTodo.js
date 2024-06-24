@@ -14,8 +14,9 @@ const newTodo = {
 dispatch({
     type: 'ADD_TODO', payload: {newTodo: newTodo}
 })
-console.log('Submit  form');
-console.log(addTodo);
+setAddTodo('')
+// console.log('Submit  form');
+// console.log(addTodo);
 }
 
 const addNewTodo = (e) => {
