@@ -1,55 +1,50 @@
 import { useReducer } from 'react';
 import './App.css';
+import Todos from './Todos';
+import AddTodo from './AddTodo';
+
+
+function reducer(todoState, action) {
+if(action.type === 'DELETE'  ) {
+ return todoState.filter((todo) => {
+  return todo.id !== action.payload.id 
+ })
+// console.log('Deleting todo');
+// console.log(action.payload.id);
+}
+
+if(action.type === 'TOGGEL_COMPLETED') {
+  return todoState.map((todo) => {
+    if(todo.id === action.payload.id) {
+      return {...todo, completed: !todo.completed}
+    }
+    // console.log('Toggle');
+    return todo
+  })
+}
+
+if(action.type === 'ADD_TODO') {
+return [...initialState, action.payload.newTodo]
+}
+
+return todoState
+}
+
+const initialState = [
+    {id: "1", title: 'learn useReducer', completed: true},
+    {id: "2", title: 'learn react', completed: false}, 
+    {id: "3", title: 'become full stack', completed: false}
+] 
 
 
 function App() {
-  function reducer(state, action) {
-    if (action.type === "INCRMENT") {
-      return { ...state, count: state.count + 1 }
-    }
-
-    if (action.type === "Decrement") {
-      return { ...state, count: state.count - 1 }
-    }
-
-    if (action.type === "RESET") {
-      return { ...state, count: 0 }
-    }
-
-    return state
-  }
-
-  const initialState = { count: 0 }
-
-  const [state, dispatch] = useReducer(reducer, initialState)
-
-  const handleIncrease = () => {
-    dispatch({
-      type: "INCRMENT"
-    })
-  }
-
-  const handleDecrease = () => {
-    dispatch({
-      type: "Decrement"
-    })
-  }
-
-  const handleReset = () => {
-    dispatch({
-      type: "RESET"
-    })
-  }
-
+  const [todoState, dispatch] = useReducer(reducer, initialState)
+  
+ 
   return (
     <div className="App">
-      <h1>UseReducer</h1>
-      <hr />
-      <h2>Counter Application</h2>
-      <h2>{state.count}</h2>
-      <button onClick={handleIncrease}>Increase</button>
-      <button onClick={handleReset}>Reset</button>
-      <button onClick={handleDecrease}>Decrease</button>
+    <AddTodo dispatch={dispatch}/>
+     <Todos todoState = {todoState} dispatch = {dispatch} />
     </div>
   );
 }
