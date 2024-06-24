@@ -1,6 +1,6 @@
 import React, { useState }  from 'react'
 import './App.css'
-export default function AddTodo({todoState, dispatch}) { 
+export default function AddTodo({ dispatch}) { 
   
 const [addTodo, setAddTodo] = useState('')
 
