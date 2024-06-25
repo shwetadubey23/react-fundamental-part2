@@ -1,14 +1,26 @@
 import React from 'react'
-import { useContext } from 'react'
-import { AuthContext } from './index'
+import { useAuth } from './AuthProvider'
+// import { useContext } from 'react'
+// import {AuthContext} from './AuthProvider'
+
 
 export default function BasicDetail() {
-   const returnValue = useContext(AuthContext)
+//    const returnValue = useContext(AuthContext)
+//    console.log('returnValue...',returnValue);
+
+const {auth, setAuth} = useAuth()
+// console.log(returnAuth);
+
+const handleLogout = () => {
+    setAuth({})
+}
+
   return (
     <div>
-        <h1>BasicDetail</h1>
-<h4>name: {returnValue.userName}</h4>
-<h4>email: {returnValue.email}</h4>
+       BasicDetail <br/>
+       <p>name: {auth.name}</p>
+       <p>email: {auth.email}</p>
+       <button onClick={handleLogout}>logout</button>
     </div>
   )
 }
