@@ -1,13 +1,17 @@
 import './App.css';
-import UserProfile from './UserProfile';
+import Todos from './Todos';
+import TodoProvider from './TodoProvider';
+import AddNewTodo from './AddNewTodo';
 
 function App() {
- 
+
   return (
-   <div>
-    App
-    <UserProfile/>
-   </div>
+    <div className='App'>
+      <TodoProvider>
+        <AddNewTodo />
+        <Todos />
+      </TodoProvider>
+    </div>
   );
 }
 
