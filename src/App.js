@@ -1,19 +1,15 @@
 
-import { useState } from 'react';
+import React from 'react';
 import './App.css';
+import Products from './component/Products';
+import CartProvider from './context/CartProvider'
 
 function App() {
-  const [userName, setUserName] = useState('')
-  function handleUserName(e) {
-    setUserName(e.target.value)
-  }
+ 
   return (
-    <div className="App">
-      <form>
-        <label>Name:</label>
-        <input type='text' value={userName} onChange={handleUserName} />
-      </form>
-    </div>
+    <CartProvider>
+      <Products/>
+    </CartProvider>
   );
 }
 
