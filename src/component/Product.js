@@ -13,8 +13,8 @@ const {dispatch} = useCart()
         img: img,
         quantity: 1
        }
+alert('Item Added')
     return dispatch({type: "ADD_ITEAM", payload:{ productIteam}})
-
     }
     return (<div style={{margin:'1rem', padding: '1rem', border: '2px solid #343434'}}>
         <p>id: {id}</p>

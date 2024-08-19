@@ -1,0 +1,46 @@
+.header {
+  background-color: #45467e;
+  color: #fff;
+  margin-bottom: 2rem;
+  /* display: flex; */
+  /* justify-content: center; */
+}
+
+.nav {
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  /* max-width: 1280px;
+  margin: auto; */
+
+}
+
+.showCartbtn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.1rem;
+  display: flex;
+  gap: 0.8rem;
+}
+
+.carIconAndNumber{
+ /* border: 0.5px solid #fff; */
+  position: relative;
+}
+
+.cartNumber{
+  border: 0.5px solid #fff;
+  position: absolute;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  font-size: 0.7rem;
+  line-height: 1.7;
+  top: -13px;
+  right: -10px;
+  background-color: red;
+}

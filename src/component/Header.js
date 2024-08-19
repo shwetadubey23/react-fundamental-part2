@@ -1,35 +1,48 @@
 import React, { useEffect, useState } from "react";
+import { BsCart3 } from "react-icons/bs";
+import styles from "./Header.module.css";
 import Modal from "./UI/Modal";
 import Cart from "./Cart";
+import Contianer from "./UI/Contianer";
 
 function Header() {
-    const [isModalOpen, setIsModalOpen] = useState(false)
-const modalClose = () => {
-   setIsModalOpen(false)
-}
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const modalClose = () => {
+        setIsModalOpen(false);
+    };
 
-useEffect(() => {
-if(isModalOpen) {
-    document.documentElement.style.overflowY = 'hidden'
-} else {
-    document.documentElement.style.overflowY = 'scroll'
-}
-}, [isModalOpen])
+    useEffect(() => {
+        if (isModalOpen) {
+            document.documentElement.style.overflowY = "hidden";
+        } else {
+            document.documentElement.style.overflowY = "scroll";
+        }
+    }, [isModalOpen]);
 
     return (
-        <header>
-            <nav>
-                <h1 className="logo">ARC Shop</h1>
-                <button onClick={() => setIsModalOpen(true)}>Show Cart </button>
-            </nav>
+        <header className={styles.header}>
+            <Contianer>
+                <nav className={styles.nav}>
+                    <h1>ARC Shop</h1>
+                    <button
+                        className={styles.showCartbtn}
+                        onClick={() => setIsModalOpen(true)}
+                    >
+                        <span className={styles.carIconAndNumber}>
+                            <BsCart3 />
+                            <span className={styles.cartNumber}>{12}</span>
+                        </span>
+                        <span>Cart</span>
+                    </button>
+                </nav>
+            </Contianer>
             {isModalOpen && (
                 <Modal modalClose={modalClose}>
                     <Cart />
-                </Modal>)
-            }
+                </Modal>
+            )}
         </header>
     );
-
 }
 
-export default Header
+export default Header;
