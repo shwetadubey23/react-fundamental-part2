@@ -19,7 +19,8 @@ export default function Cart() {
                     <CartIteam key={iteam.id} {...iteam} />
                 ))}
             </div>
-          <h1> Total Amount: {total}</h1> 
+            {/* want to give rupee symbol here &#8377: */}
+          <h1> Total Amount: ₹₹ {total}</h1> 
         </>
     );
 }

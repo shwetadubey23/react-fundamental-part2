@@ -4,8 +4,15 @@ import styles from "./Header.module.css";
 import Modal from "./UI/Modal";
 import Cart from "./Cart";
 import Contianer from "./UI/Contianer";
+import { useCart } from "../context/CartProvider";
 
 function Header() {
+    const { cart } = useCart();
+
+    let totalQuantity = 0;
+for(let i=0; i<cart.length; i++){
+    totalQuantity += cart[i].quantity
+}
     const [isModalOpen, setIsModalOpen] = useState(false);
     const modalClose = () => {
         setIsModalOpen(false);
@@ -30,7 +37,9 @@ function Header() {
                     >
                         <span className={styles.carIconAndNumber}>
                             <BsCart3 />
-                            <span className={styles.cartNumber}>{12}</span>
+                            <span className={styles.cartNumber}>
+                                {totalQuantity}
+                            </span>
                         </span>
                         <span>Cart</span>
                     </button>

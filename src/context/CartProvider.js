@@ -36,7 +36,7 @@ function cartReducer(cartState, action) {
             return cartState.filter((item) => item.id !== action.payload.id);
         }
         default:
-            cartState;
+            return cartState;
     }
 }
 
